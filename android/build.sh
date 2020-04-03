@@ -15,8 +15,6 @@ export CPU_SSE42=false
 # EXP_PICK_CHANGES
 
 # setup pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 
