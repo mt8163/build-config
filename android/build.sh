@@ -18,14 +18,6 @@ export CPU_SSE42=false
 eval "$(pyenv init -)"
 
 
-function use_python2 {
-    pyenv global 2.7.16
-}
-
-function use_python3 {
-    pyenv global 3.7.4
-}
-
 if [ -z "$BUILD_UUID" ]; then
   export BUILD_UUID=$(uuidgen)
 fi
@@ -33,13 +25,11 @@ fi
 if [ -z "$TYPE" ]; then
   export TYPE=userdebug
 fi
-
 export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
 
 echo "--- Syncing"
-use_python3
-
-cd $HOME/android/${VERSION}
+mdkir -p /home/*/android/${VERSION} 
+cd /home/*/android/${VERSION}
 rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
@@ -54,13 +44,12 @@ repo sync -j32 -d --force-sync > /tmp/android-sync.log 2>&1
 
 
 echo "--- clobber"
-use_python2
 rm -rf out
 
-echo "--- breakfast"
-use_python3
+echo "--- lunch"
 set +e
-breakfast lineage_${DEVICE}-${TYPE}
+lunch lineage_${DEVICE}-${TYPE}
+cmka bacon
 set -e
 
 if [[ "$TARGET_PRODUCT" != lineage_* ]]; then
@@ -74,7 +63,6 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
   fi
 fi
 echo "--- Building"
-use_python2
 mka otatools-package target-files-package dist > /tmp/android-build.log
 
 echo "--- Uploading"
