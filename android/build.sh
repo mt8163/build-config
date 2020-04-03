@@ -19,8 +19,6 @@ export CPU_SSE42=false
 # RELEASE_TYPE
 # EXP_PICK_CHANGES
 
-# setup pyenv
-eval "$(pyenv init -)"
 
 
 if [ -z "$BUILD_UUID" ]; then
@@ -33,8 +31,8 @@ fi
 export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
 
 echo "--- Syncing"
-mkdir -p /home/*/android/${VERSION} 
-cd /home/*/android/${VERSION}
+mkdir -p $HOME/android/${VERSION} 
+cd $HOME/android/${VERSION}
 rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
