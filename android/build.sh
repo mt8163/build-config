@@ -46,6 +46,7 @@ repo sync device/amazon/${DEVICE}
 repo sync kernel/amazon/${DEVICE}
 repo sync vendor/amazon/${DEVICE}
 repo sync vendor/amazon/mt8163
+repo sync vendor/raffy
 . build/envsetup.sh
 
 echo "--- clobber"
