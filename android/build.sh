@@ -41,16 +41,13 @@ yes | repo init -u https://github.com/mt8163/android.git -b ${VERSION}
 rm -rf .repo/local_manifests
 git clone https://github.com/mt8163/local_manifests.git -b ${VERSION} .repo/local_manifests
 echo "Syncing"
-repo sync -j32
+repo sync --force-sync -j32
 repo sync device/amazon/${DEVICE}
 repo sync kernel/amazon/${DEVICE}
 repo sync vendor/amazon/${DEVICE}
 repo sync vendor/amazon/mt8163
 repo sync vendor/raffy
 . build/envsetup.sh
-
-echo "--- clobber"
-rm -rf out
 
 echo "--- lunch"
 set +e
