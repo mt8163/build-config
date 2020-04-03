@@ -39,12 +39,9 @@ if [ -f /lineage/setup.sh ]; then
 fi
 yes | repo init -u https://github.com/mt8163/android.git -b ${VERSION}
 git clone https://github.com/mt8163/local_manifests.git -b ${VERSION} .repo/local_manifests
-echo "Resetting build tree"
-repo forall -vc "git reset --hard" > /tmp/android-reset.log 2>&1
 echo "Syncing"
-repo sync -j32 -d --force-sync > /tmp/android-sync.log 2>&1
+repo sync -j32
 . build/envsetup.sh
-
 
 echo "--- clobber"
 rm -rf out
