@@ -4,6 +4,11 @@ export USE_CCACHE="1"
 export PYTHONDONTWRITEBYTECODE=true
 export BUILD_ENFORCE_SELINUX=1
 export BUILD_NO=
+mkdir ~/bin
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+PATH=~/bin:$PATH
+chmod a+x ~/bin/repo
+
 unset BUILD_NUMBER
 #TODO(zif): convert this to a runtime check, grep "sse4_2.*popcnt" /proc/cpuinfo
 export CPU_SSE42=false
