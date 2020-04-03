@@ -41,7 +41,7 @@ export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 
 echo "--- Syncing"
 use_python3
 
-cd /lineage/${VERSION}
+cd ~/android/${VERSION}
 rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
