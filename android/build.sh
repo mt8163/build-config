@@ -46,7 +46,8 @@ rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
-yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION}
+yes | repo init -u https://github.com/mt8163/android.git -b ${VERSION}
+git clone https://github.com/mt8163/local_manifests.git -b ${VERSION} .repo/local_manifests
 echo "Resetting build tree"
 repo forall -vc "git reset --hard" > /tmp/android-reset.log 2>&1
 echo "Syncing"
@@ -79,7 +80,3 @@ use_python2
 mka otatools-package target-files-package dist > /tmp/android-build.log
 
 echo "--- Uploading"
-use_python2
-ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
