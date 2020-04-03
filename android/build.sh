@@ -28,7 +28,7 @@ fi
 export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
 
 echo "--- Syncing"
-mdkir -p /home/*/android/${VERSION} 
+mkdir -p /home/*/android/${VERSION} 
 cd /home/*/android/${VERSION}
 rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
